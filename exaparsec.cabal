@@ -1,0 +1,68 @@
+cabal-version:   2.4
+name:            exaparsec
+version:         0
+license:         BSD-3-Clause
+build-type:      Simple
+license-file:    LICENSE
+author:          David M. Sledge
+maintainer:      David M. Sledge <sledged@gmail.com>
+copyright:       2022 David M. Sledge
+tested-with:     GHC ==8.6.3 || ==8.8.3 || ==8.10.5
+extra-doc-files:
+  CHANGELOG.md
+  README.md
+
+-- category:
+-- description:     description
+-- synopsis:        one-line synopsis
+-- homepage:        https://github.com/FIXME/exaparsec#readme
+-- source-repository head
+--   type:     git
+--   location: git://github.com/FIXME/exaparsec.git
+
+common common-options
+  build-depends:    base >=4.9 && <5
+  default-language: Haskell2010
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-uni-patterns
+    -Wincomplete-record-updates -Wredundant-constraints
+    -fhide-source-paths -Wpartial-fields
+
+library
+  import:          common-options
+  hs-source-dirs:  src
+  exposed-modules: Lib
+  build-depends:
+    , containers
+    , mtl
+
+executable exaparsec-exe
+  import:         common-options
+  hs-source-dirs: app
+  main-is:        Main.hs
+  build-depends:  exaparsec
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
+
+test-suite exaparsec-test
+  import:         common-options
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is:        Spec.hs
+  build-depends:
+    , hspec
+    , HUnit
+    , exaparsec
+    , QuickCheck
+
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
+
+benchmark exaparsec-bench
+  import:         common-options
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: bench
+  main-is:        Main.hs
+  build-depends:
+    , criterion
+    , exaparsec
+
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N

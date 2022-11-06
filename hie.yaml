@@ -1,0 +1,16 @@
+cradle:
+  multi:
+    # - path: "ignore/"
+    #   config: {cradle: {none: }}
+
+    - path: "src"
+      config: {cradle: {cabal: {component: "lib:exaparsec"}}}
+
+    - path: "app"
+      config: {cradle: {cabal: {component: "exaparsec:exaparsec-exe"}}}
+
+    - path: "test"
+      config: {cradle: {cabal: {component: "exaparsec:exaparsec-test"}}}
+
+    - path: "bench"
+      config: {cradle: {cabal: {component: "exaparsec:exaparsec-bench"}}}
